@@ -1,6 +1,6 @@
 % This function modify the expression sent from client to right for the
 % matlab syntax.
-function ret = modify(expr)
+function ret = Man_to_MATLAB(expr)
 %% 공백 문자를 지운다.
 expr(expr == ' ') = [];
 
@@ -30,5 +30,4 @@ expr = strrep(expr, 'ln(', 'log(');
 
 % sigma( -> symsum(
 expr = strrep(expr, 'sigma(', 'symsum(');
-
 ret = expr;

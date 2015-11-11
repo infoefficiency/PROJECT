@@ -33,6 +33,4 @@ for i = 1:length(expr)
         end% end for
     end % end if
 end % end for 
-
-modified_expr = expr;
 sym_list = var.toArray;
