@@ -5,10 +5,10 @@ try
     mode = str(1);
     expr = str(3:end);    
     % 입력 받은 문자열을 매트랩이 인식할 수 있게 변경
-    expr = Man_to_MATLAB(expr);
+    expr = MAN_to_MATLAB(expr);
     
     % 변수 선언
-    sym_list = get_Symbolic(expr);        
+    sym_list = Get_Symbolic(expr);        
     for i = 1:length(sym_list)
         syms(sym_list(i));
     end
@@ -18,7 +18,7 @@ try
         ret = char(eval(expr));
     %% Solve Equation.
     elseif mode == 'E'
-        expr = arrange(expr, sym_list);        
+        expr = Arrange(expr, sym_list);        
         if nnz( expr == '''' )            
             % prime의 위치를 파악해서 y'' => D2y 로 바꾼다.
             while true
@@ -56,7 +56,7 @@ try
     else
         ret = 'There are some errors in expression.';    
     end        
-    ret = MATLAB_to_Man(ret);    
+    ret = MATLAB_to_MAN(ret);    
 catch
     ret = 'There are some errors in expression.';    
 end

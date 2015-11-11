@@ -30,7 +30,7 @@ while true
 
         %% Calculation  
         if Msg(1) ~= 'G'
-            Msg = calc(Msg);          
+            Msg = Calc(Msg);          
             disp(['Result : ', Msg]);
             dos.writeUTF(Msg);
             disp('Sent data to client');
