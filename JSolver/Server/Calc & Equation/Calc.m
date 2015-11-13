@@ -1,5 +1,5 @@
 % This function is about calculation.
-function ret = calc(str)
+function ret = Calc(str)
 try
     %% Preprocess
     mode = str(1);
@@ -54,9 +54,9 @@ try
             end
         end
     else
-        ret = 'There are some errors in expression.';    
+        ret = 'There are some errors in expression or Expression is too complicated.';    
     end        
     ret = MATLAB_to_MAN(ret);    
 catch
-    ret = 'There are some errors in expression.';    
+    ret = 'There are some errors in expression or Expression is too complicated';
 end
