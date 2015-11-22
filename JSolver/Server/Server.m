@@ -2,6 +2,7 @@ clear all;
 close all;
 pause(1);
 
+format long;
 import java.io.*;
 import java.lang.*;
 import java.net.ServerSocket;
@@ -38,9 +39,9 @@ import java.net.Socket;
        %% Graph.        
         elseif (Msg(1) == 'G')    
             expr = makeGraph(Msg);            
-            % Àü¼Û¹ÞÀº ½ÄÀ» echo Àü¼Û
+            % ï¿½ï¿½Û¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ echo ï¿½ï¿½ï¿½
             dos.writeUTF(expr);            
-            % ±×·¡ÇÁ¸¦ Àü¼Û
+            % ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             fName = String('graph.jpg');            
             outFile = File(fName);            
             fis = FileInputStream(outFile);
@@ -58,7 +59,7 @@ import java.net.Socket;
         
         %% Curve Fitting.
         elseif (Msg(1) == 'F')
-            
+            expr = do_Fitting(expr)
         end                            
         dis.close;   
         dos.close;   

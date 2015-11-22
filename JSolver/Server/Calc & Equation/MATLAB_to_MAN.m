@@ -1,6 +1,6 @@
 % This function modify the processed expression to the more friendly syntax
 % for man
-function ret = MATLAB_to_Man(expr)
+function ret = MATLAB_to_MAN(expr)
 
 expr = strrep(expr, 'log10(', 'log(');
 expr = strrep(expr, 'log2(', 'lg(');

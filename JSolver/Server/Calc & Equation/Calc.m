@@ -4,10 +4,10 @@ try
     %% Preprocess
     mode = str(1);
     expr = str(3:end);    
-    % ÀÔ·Â ¹ÞÀº ¹®ÀÚ¿­À» ¸ÅÆ®·¦ÀÌ ÀÎ½ÄÇÒ ¼ö ÀÖ°Ô º¯°æ
+    % ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½
     expr = MAN_to_MATLAB(expr);
     
-    % º¯¼ö ¼±¾ð
+    % ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     sym_list = Get_Symbolic(expr);        
     for i = 1:length(sym_list)
         syms(sym_list(i));
@@ -15,12 +15,32 @@ try
     
     %% Calculation
     if mode == 'C'
-        ret = char(eval(expr));
+        % get result
+        rst1 = eval(expr);
+        % if result can be calculated more, then do it.
+        if( isnumeric(rst1) ) % Non able to calculate more.
+            ret = num2str(rst1);
+        else % calculate more
+            rst1 = char(rst1);
+            rst2 = eval(rst1);
+            
+            if isa(rst2, 'double')
+                rst2 = num2str(rst2, 10);
+            elseif isa(rst2, 'sym')
+                rst2 = char(rst2);
+            end
+            
+            if strcmp(rst1, rst2)
+                ret = rst1;
+            else                
+                ret = strcat(rst1, {' = '}, rst2);
+            end
+        end
     %% Solve Equation.
     elseif mode == 'E'
         expr = Arrange(expr, sym_list);        
         if nnz( expr == '''' )            
-            % primeÀÇ À§Ä¡¸¦ ÆÄ¾ÇÇØ¼­ y'' => D2y ·Î ¹Ù²Û´Ù.
+            % primeï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ä¾ï¿½ï¿½Ø¼ï¿½ y'' => D2y ï¿½ï¿½ ï¿½Ù²Û´ï¿½.
             while true
                 % find the position of  prime
                 pos = strfind(expr, '''');
@@ -35,13 +55,13 @@ try
                         len = len + 1;
                     else
                         break;
-                    end         
+                    end
                 end
                 % replace (variable + prime) to MATLAB syntax
                 expr = strrep(expr, expr(pos(1)-1 : pos(1+len-1)), ['D', num2str(len), expr(pos(1)-1)]);              
             end
             
-            % ----- 'x'´Â »ç¿ëÀÚ¿¡ ¸Â°Ô ¼öÁ¤ÇÒ ¼ö ÀÖ°Ô ±¸ÇöÇØ¾ßÇÑ´Ù.
+            % ----- 'x'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½.
             rst = dsolve(expr, 'x');
             ret = char(rst);
         else
@@ -54,9 +74,14 @@ try
             end
         end
     else
-        ret = 'There are some errors in expression or Expression is too complicated.';    
+        ret = 'Expression is error/complicated.';
     end        
-    ret = MATLAB_to_MAN(ret);    
+    
+    % if 'return value' is character, then call MATLAB to MAN
+    if ischar(ret)
+        ret = MATLAB_to_MAN(ret);    
+    end
 catch
-    ret = 'There are some errors in expression or Expression is too complicated';
+    ret = 'Expression is error/complicated.';
+    
 end
