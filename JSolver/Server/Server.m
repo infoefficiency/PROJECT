@@ -8,7 +8,7 @@ import java.lang.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-% while true
+%while true
     %% Connect
     port = 9000;
     server = ServerSocket(port);
@@ -39,9 +39,9 @@ import java.net.Socket;
        %% Graph.        
         elseif (Msg(1) == 'G')    
             expr = makeGraph(Msg);            
-            % ï¿½ï¿½Û¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ echo ï¿½ï¿½ï¿½
+            % ï¿½ï¿½Û¹ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ echo ï¿½ï¿½ï¿?
             dos.writeUTF(expr);            
-            % ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            % ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿?
             fName = String('graph.jpg');            
             outFile = File(fName);            
             fis = FileInputStream(outFile);
@@ -71,4 +71,4 @@ import java.net.Socket;
         dos.close;   
         server.close; 
     end         
-% end
+%end

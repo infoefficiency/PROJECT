@@ -5,10 +5,10 @@ function ret = makeGraph(Msg)
 % 전송 받은 문자열을 분해하여 옵션을 지정한다.
 Msg_cell = strsplit(Msg, '?');
 rangeXY = strsplit(Msg_cell{2}, ',');
-x_lb = str2double(rangeXY{1});
-x_ub = str2double(rangeXY{2});
-y_lb = str2double(rangeXY{3});
-y_ub = str2double(rangeXY{4});            
+x_lb = eval(MAN_to_MATLAB(rangeXY{1}));
+x_ub = eval(MAN_to_MATLAB(rangeXY{2}));
+y_lb = eval(MAN_to_MATLAB(rangeXY{3}));
+y_ub = eval(MAN_to_MATLAB(rangeXY{4}));            
 
 x_label = Msg_cell{3};
 y_label = Msg_cell{4};

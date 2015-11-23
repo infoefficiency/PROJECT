@@ -1,13 +1,13 @@
 % This function return the name of symbolic variable lists.
 
-function sym_list = get_Symbolic(expr)
+function sym_list = Get_Symbolic(expr)
 %% exprssion을 읽어서 변수를 Symbolic 변수로 선언한다.
 %문자 후보를 담는 HashSet
 
 var = java.util.HashSet;        
 % 방법 : 
 % 어떤 문자의 오른쪽이 문자이면 변수가 아니다. 패스한다.
-% 어떤 문자의 오른쪽이 +, -, *, /, ^, ' ', ','  이면 변수를 나눈다.
+% 어떤 문자의 오른쪽이 +, -, *, /, ^, ' ', ',' , ''' 이면 변수를 나눈다.
 for i = 1:length(expr)
     if( isletter(expr(i) ) )
         for j = i+1 :length(expr)
@@ -19,7 +19,7 @@ for i = 1:length(expr)
                 continue;
             % 한 단어가 끝날 곳
             elseif( j <= length(expr) && ( expr(j) == '+' || expr(j) == '-' || expr(j) == '*' || expr(j) == '/' ||...
-                    expr(j) == '^' || expr(j) == ' ' || expr(j) == ',' || expr(j) == ')' ))                        
+                    expr(j) == '^' || expr(j) == ' ' || expr(j) == ',' || expr(j) == ')' ) || expr(j) == '''')                        
                 tmp = expr(i:j-1);                                                
                % 변수 생성 
                 if (var.contains(tmp) == 0)
