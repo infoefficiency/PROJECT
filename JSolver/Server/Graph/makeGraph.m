@@ -1,37 +1,44 @@
-function ret = makeGraph(Msg)
-% G?x½ÃÀÛ,x³¡,y½ÃÀÛ,y³¡?XÅ¸ÀÌÆ²?YÅ¸ÀÌÆ²?±×·¡ÇÁÅ¸ÀÌÆ²?¼ö½Äµ¥ÀÌÅÍ
+function [ret, ok] = makeGraph(Msg)
+% G?xï¿½ï¿½ï¿½ï¿½,xï¿½ï¿½,yï¿½ï¿½ï¿½ï¿½,yï¿½ï¿½?XÅ¸ï¿½ï¿½Æ²?YÅ¸ï¿½ï¿½Æ²?ï¿½×·ï¿½ï¿½ï¿½Å¸ï¿½ï¿½Æ²?ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½
 % ex) G?-10,10,-10,10?X?Y?(Input)?y=x
 
-% Àü¼Û ¹ÞÀº ¹®ÀÚ¿­À» ºÐÇØÇÏ¿© ¿É¼ÇÀ» ÁöÁ¤ÇÑ´Ù.
-Msg_cell = strsplit(Msg, '?');
-rangeXY = strsplit(Msg_cell{2}, ',');
-x_lb = eval(MAN_to_MATLAB(rangeXY{1}));
-x_ub = eval(MAN_to_MATLAB(rangeXY{2}));
-y_lb = eval(MAN_to_MATLAB(rangeXY{3}));
-y_ub = eval(MAN_to_MATLAB(rangeXY{4}));            
+% ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+try
+    ok = 1;
+    Msg_cell = strsplit(Msg, '?');
+    rangeXY = strsplit(Msg_cell{2}, ',');
+    x_lb = eval(MAN_to_MATLAB(rangeXY{1}));
+    x_ub = eval(MAN_to_MATLAB(rangeXY{2}));
+    y_lb = eval(MAN_to_MATLAB(rangeXY{3}));
+    y_ub = eval(MAN_to_MATLAB(rangeXY{4}));            
 
-x_label = Msg_cell{3};
-y_label = Msg_cell{4};
-if( strcmp(Msg_cell{5} , '(Input)') )
-    g_title = Msg_cell{6};
-else
-    g_title = Msg_cell{5};
+    x_label = Msg_cell{3};
+    y_label = Msg_cell{4};
+    if( strcmp(Msg_cell{5} , '(Input)') )
+        g_title = Msg_cell{6};
+    else
+        g_title = Msg_cell{5};
+    end
+
+    ret = Msg_cell{6};
+    expr = strsplit(Msg_cell{6}, ',');
+
+    % ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½              
+    hold on;
+    color_list = {'r', 'b', 'g', 'k', 'y', 'm', 'c'};
+    for i = 1: length(expr)
+        h(i) = ezplot(expr{i}, [x_lb, x_ub, y_lb, y_ub]);            
+        set(h(i), 'Color', color_list{i});
+    end
+    grid(gca, 'on');   
+    title(g_title); xlabel(x_label); ylabel(y_label);
+    legend(h(:), expr{:});
+
+    % ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+    hold off
+    print('/home/jinsol/Capstone/Graph/graph', '-djpeg');      
+    close;
+catch
+    ok = 0;
+    ret = 'Error function';
 end
-
-ret = Msg_cell{6};
-expr = strsplit(Msg_cell{6}, ',');
-
-% ±×·¡ÇÁ »ý¼º              
-hold on;
-color_list = {'r', 'b', 'g', 'k', 'y', 'm', 'c'};
-for i = 1: length(expr)
-    h(i) = ezplot(expr{i}, [x_lb, x_ub, y_lb, y_ub]);            
-    set(h(i), 'Color', color_list{i});
-end
-grid(gca, 'on');   
-title(g_title); xlabel(x_label); ylabel(y_label);
-legend(h(:), expr{:});
-
-% ±×¸²À» ÀúÀåÇÑ´Ù.
-hold off
-print('graph', '-djpeg');      

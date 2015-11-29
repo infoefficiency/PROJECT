@@ -74,7 +74,7 @@ try
             end
         end
     else
-        ret = 'Expression is error/complicated.';
+        ret = 'Error expression';
     end        
     
     % if 'return value' is character, then call MATLAB to MAN
@@ -82,6 +82,6 @@ try
         ret = MATLAB_to_MAN(ret);    
     end
 catch
-    ret = 'Expression is error/complicated.';
+    ret = 'Error expression';
     
 end
