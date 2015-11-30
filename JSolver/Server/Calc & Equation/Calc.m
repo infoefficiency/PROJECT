@@ -14,7 +14,7 @@ try
     end
     
     %% Calculation
-    if mode == 'C'
+    if mode == 'C' || mode == 'A'
         % get result
         rst1 = eval(expr);
         % if result can be calculated more, then do it.

@@ -28,6 +28,31 @@ expr = strrep(expr, 'log(', 'log10(');
 expr = strrep(expr, 'lg(', 'log2(');
 expr = strrep(expr, 'ln(', 'log(');
 
-% sigma( -> symsum(
+%% sigma( -> symsum(
 expr = strrep(expr, 'sigma(', 'symsum(');
+
+%% factorial
+a = strfind(expr, '!');
+if ~isempty(a)    
+    idx = a(1);
+    if expr(idx-1) == ')'
+        for i = idx-1:-1:1
+            if expr(i) == '('
+                expr = [expr(1:i-1), 'factorial', expr(i:idx-1), expr(idx+1:end)];
+                break;
+            end
+        end
+    elseif '0'<= expr(idx-1) && expr(idx-1) <= '9'
+        for i = idx-1:-1:1
+            if i == 1
+                expr = ['factorial(',expr(1:idx-1), ')', expr(idx+1:end)];
+                break;
+            elseif ~('0'<= expr(i) && expr(i) <= '9')
+                expr = [expr(1:i), 'factorial(', expr(i+1:idx-1), ')', expr(idx+1:end)];
+                break;
+            end
+        end
+    end
+end
+
 ret = expr;

@@ -14,7 +14,7 @@ while true
     tmp = strsplit(str, '#');
     str = char(tmp(1));
 
-    if( str(1) == 'C' || str(1) == 'E')
+    if(str(1) == 'A' || str(1) == 'C' || str(1) == 'E')
         rst = Calc(str);
         disp(['Result : ', rst]);
     elseif( str(1) == 'G')
