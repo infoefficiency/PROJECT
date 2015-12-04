@@ -1,16 +1,14 @@
 % This function modify the expression sent from client to right for the
 % matlab syntax.
 function ret = MAN_to_MATLAB(expr)
-%% ��� ���ڸ� �����.
+%% remove the black.
 expr(expr == ' ') = [];
 
-%% 4x -> 4*x �� �ٲ۴�.
+%% 4x -> 4*x 
 tmp_expr = '';
-for i = 1:length(expr)
-    % ���� ���� �ڰ� �����̸� �� ���̿� * �߰�
+for i = 1:length(expr)    
     if( (i + 1 <= length(expr)) && ( '0' <= expr(i)  && expr(i) <= '9' ) && isletter(expr(i+1)) )
-        tmp_expr = strcat(tmp_expr,[expr(i),'*']);
-    % ���� ')' �̰� �ڰ� ���ڳ� �����̸� �� ���̿� * �߰�
+        tmp_expr = strcat(tmp_expr,[expr(i),'*']);    
     elseif ( (i + 1 <= length(expr)) && ( expr(i) == ')'  && (isletter(expr(i+1)) || ( '0' <= expr(i+1)  && expr(i+1) <= '9' ))))
         tmp_expr = strcat(tmp_expr,[expr(i),'*']);
     else
@@ -19,7 +17,7 @@ for i = 1:length(expr)
 end
 expr = tmp_expr;
 
-%% log ����ؼ� ���ڿ� ����. ���� ��� �����Ѵ�.
+%% log  conversion.
 % log( -> log10(
 % lg( -> log2(
 % ln( -> log(

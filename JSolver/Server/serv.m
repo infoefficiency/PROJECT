@@ -1,11 +1,10 @@
 while true
-    disp('strat!!');
+    disp('process strat');
     while true
         if (exist('data_to_MATLAB.txt') == 2)
             break;
         end
     end
-
     fin = fopen('data_to_MATLAB.txt', 'r');
     A = textscan(fin, '%s');
     A = cellfun(@transpose,A,'un',0);
@@ -19,22 +18,29 @@ while true
         disp(['Result : ', rst]);
     elseif( str(1) == 'G')
         [rst, ok] = makeGraph(str);        
-        ferr = fopen('/home/jinsol/Capstone/Graph/err.txt', 'w');
+        ferr = fopen('./Graph/err.txt', 'w');
         if ok == 1
             fwrite(ferr, '1');
             fclose(ferr);
         elseif ok == 0
             fwrite(ferr, '0');
             fclose(ferr);
-        end
+        end    
     elseif( str(1) == 'F')
-
+        [rst, ok] = Fitting(str);
+        ferr = fopen('./Curve_Fitting/err.txt', 'w');
+        if ok == 1
+            fwrite(ferr, '1');
+            fclose(ferr);
+        elseif ok == 0
+            fwrite(ferr, '0')
+            fclose(ferr);
+        end
     end
-
-    fout = fopen('/home/jinsol/Capstone/Server/data_to_cpp.txt', 'w');
+    
+    fout = fopen('./Server/data_to_cpp.txt', 'w');
     fwrite(fout, rst);
-
     fclose(fin);
     fclose(fout);
-    disp('end');
+    disp('process end');
 end

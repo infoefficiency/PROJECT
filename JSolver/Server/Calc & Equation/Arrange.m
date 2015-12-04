@@ -1,5 +1,4 @@
 function ret = arrange(expr, sym_list)
-% 변수 선언
 for i = 1:length(sym_list)
     syms(sym_list(i));
 end

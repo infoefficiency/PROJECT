@@ -1,7 +1,10 @@
 #ifndef F_P
 #define F_P
 
+#include <unistd.h>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 // 1)make txt file in order to send the expression.
@@ -12,8 +15,8 @@ void make_txt(const string& buf){
     fout.close();
 }
 
-// 2)get the result from MATLAB and save it in the string.
-string get_result(int client_sock){
+// 2)get the result from MATLAB and save it in the string. send the result.
+string getRst_sendRst(int client_sock){
     //wait until the "data_to_cpp.txt" file will be generated.
     while(1){
         if( access("data_to_cpp.txt", F_OK) != -1){
@@ -53,20 +56,22 @@ string get_result(int client_sock){
     return ret;
 }
 
-// 3) send the graph
-void send_graph(int client_sock){
+// 3) send the grap
+void send_graph(int client_sock, const string path){
     ifstream ferr;
-    ferr.open("/home/jinsol/Capstone/Graph/err.txt");
+    ferr.open(path + "/err.txt");
     char ck[2];
     ferr.read(ck, 2);
 
     char buf[1000000];
     ifstream fin;
     if(ck[0] == '1'){
-        fin.open("/home/jinsol/Capstone/Graph/graph.jpg", ios::binary);
+        sleep(1); //wait the completion of graph process
+        fin.open(path + "/graph.jpg", ios::binary);        
     }
     else{
-        fin.open("/home/jinsol/Capstone/Graph/error.jpg", ios::binary);
+		sleep(1); //wait the completion of graph process
+        fin.open(path + "/error.jpg", ios::binary);
     }
 
     fin.seekg(0, ios::end);
@@ -75,8 +80,6 @@ void send_graph(int client_sock){
     fin.read(buf, sz);
     write(client_sock, buf, sz);
 }
-
-
 
 void remove_file(const string& s){
     if(remove(s.c_str()) == -1){

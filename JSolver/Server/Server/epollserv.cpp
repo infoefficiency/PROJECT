@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
             }
             else{
                 // receive message from client
-                char msg[200];
+                char msg[10000];
                 int str_len;
                 if( (str_len = read(ep_vec[i].data.fd, msg, sizeof(msg)) ) == -1){
                     error_handling("read() from client error");
@@ -75,35 +75,33 @@ int main(int argc, char* argv[]){
 
                 if(buf[0] == 'C'|| buf[0] == 'A'){
                     make_txt(buf);
-                    rst = get_result(ep_vec[i].data.fd);
+                    rst = getRst_sendRst(ep_vec[i].data.fd);
                     remove_file("data_to_MATLAB.txt");
                     remove_file("data_to_cpp.txt");
                 }
                 else if(buf[0] == 'E'){
                     make_txt(buf);
-                    rst = get_result(ep_vec[i].data.fd);
+                    rst = getRst_sendRst(ep_vec[i].data.fd);
                     remove_file("data_to_MATLAB.txt");
                     remove_file("data_to_cpp.txt");
                 }
                 else if(buf[0] == 'G'){
                     make_txt(buf);
-                    rst = get_result(ep_vec[i].data.fd);
+                    rst = getRst_sendRst(ep_vec[i].data.fd);
                     remove_file("data_to_MATLAB.txt");
                     remove_file("data_to_cpp.txt");
-                    send_graph(client_sock);
+                    send_graph(client_sock, "./../Graph");
                 }
                 else if(buf[0] == 'F'){
-                    make_txt(buf);
-                    rst = get_result(ep_vec[i].data.fd);
+                    make_txt(buf);                    
+                    rst = getRst_sendRst(ep_vec[i].data.fd);
                     remove_file("data_to_MATLAB.txt");
                     remove_file("data_to_cpp.txt");
-                    send_graph(client_sock);
+                    send_graph(client_sock, "./../Curve_Fitting");
                 }
-
                 cout << "result : " << rst << endl; 
                 epoll_ctl(epfd, EPOLL_CTL_DEL, ep_vec[i].data.fd, NULL);
                 close(ep_vec[i].data.fd);
-
                 cout<< "closed client : " << ep_vec[i].data.fd << endl;
             }
         }

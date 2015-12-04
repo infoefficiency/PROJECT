@@ -1,8 +1,4 @@
 function [ret, ok] = makeGraph(Msg)
-% G?x����,x��,y����,y��?XŸ��Ʋ?YŸ��Ʋ?�׷���Ÿ��Ʋ?���ĵ�����
-% ex) G?-10,10,-10,10?X?Y?(Input)?y=x
-
-% ��� ���� ���ڿ��� �����Ͽ� �ɼ��� �����Ѵ�.
 try
     ok = 1;
     Msg_cell = strsplit(Msg, '?');
@@ -20,10 +16,8 @@ try
         g_title = Msg_cell{5};
     end
 
-    ret = Msg_cell{6};
-    expr = strsplit(Msg_cell{6}, ',');
-
-    % �׷��� ��              
+    ret = MAN_to_MATLAB(Msg_cell{6});
+    expr = strsplit(ret, ',');    
     hold on;
     color_list = {'r', 'b', 'g', 'k', 'y', 'm', 'c'};
     for i = 1: length(expr)
@@ -32,11 +26,9 @@ try
     end
     grid(gca, 'on');   
     title(g_title); xlabel(x_label); ylabel(y_label);
-    legend(h(:), expr{:});
-
-    % �׸��� �����Ѵ�.
+    legend(h(:), expr{:});    
     hold off
-    print('/home/jinsol/Capstone/Graph/graph', '-djpeg');      
+    print('./Graph/graph', '-djpeg');        
     close;
 catch
     ok = 0;
