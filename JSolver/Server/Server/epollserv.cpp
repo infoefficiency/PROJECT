@@ -11,19 +11,13 @@ int main(int argc, char* argv[]){
     int serv_sock, client_sock;
     struct sockaddr_in serv_addr, client_addr;
     socklen_t addr_sz = sizeof(serv_addr);
-    char buf[BUF_SIZE];
-
-    if(argc != 2){
-        cout << "Usage : " << argv[0] << "<port>"<<endl;
-        exit(1);
-    }
-
+        
     serv_sock = socket(PF_INET, SOCK_STREAM, 0);
     memset(&serv_addr, 0, addr_sz);
 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serv_addr.sin_port = htons( atoi(argv[1]) );
+    serv_addr.sin_port = htons(9990);
 
     if( bind(serv_sock, (struct sockaddr*)&serv_addr, addr_sz) == -1){
         error_handling("bind() error");
