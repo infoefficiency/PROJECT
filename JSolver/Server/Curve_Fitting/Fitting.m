@@ -68,6 +68,10 @@ try
         for i = 1: length(coefn)
             ret = [ret, coefn{i}, ' : ', num2str(coefv(i)), '\n'];
         end
+        
+        for i = 1:length(M2)
+            ret = [ret, 'f(', num2str(M2(i)), ') = ', num2str(f(M2(i))), '\n'];
+        end
     else   
         ret = 'No expression';    
     end

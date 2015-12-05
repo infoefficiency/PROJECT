@@ -10,7 +10,7 @@ using namespace std;
 // 1)make txt file in order to send the expression.
 void make_txt(const string& buf){
     ofstream fout;
-    fout.open("data_to_MATLAB.txt");
+    fout.open("./Server/data_to_MATLAB.txt");
     fout << buf << endl;
     fout.close();
 }
@@ -19,7 +19,7 @@ void make_txt(const string& buf){
 string getRst_sendRst(int client_sock){
     //wait until the "data_to_cpp.txt" file will be generated.
     while(1){
-        if( access("data_to_cpp.txt", F_OK) != -1){
+        if( access("./Server/data_to_cpp.txt", F_OK) != -1){
             break;
         }
     }
@@ -27,7 +27,7 @@ string getRst_sendRst(int client_sock){
     string ret, tmp;
     ifstream fin;
 
-    fin.open("data_to_cpp.txt");
+    fin.open("./Server/data_to_cpp.txt");
 
     //wait until the MATLAB write what MATLAB calculate.
     while(1){
@@ -70,7 +70,6 @@ void send_graph(int client_sock, const string path){
         fin.open(path + "/graph.jpg", ios::binary);        
     }
     else{
-		sleep(1); //wait the completion of graph process
         fin.open(path + "/error.jpg", ios::binary);
     }
 

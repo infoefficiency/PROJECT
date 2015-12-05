@@ -11,7 +11,8 @@ int main(int argc, char* argv[]){
     int serv_sock, client_sock;
     struct sockaddr_in serv_addr, client_addr;
     socklen_t addr_sz = sizeof(serv_addr);
-        
+    char buf[BUF_SIZE];
+
     serv_sock = socket(PF_INET, SOCK_STREAM, 0);
     memset(&serv_addr, 0, addr_sz);
 
@@ -70,28 +71,28 @@ int main(int argc, char* argv[]){
                 if(buf[0] == 'C'|| buf[0] == 'A'){
                     make_txt(buf);
                     rst = getRst_sendRst(ep_vec[i].data.fd);
-                    remove_file("data_to_MATLAB.txt");
-                    remove_file("data_to_cpp.txt");
+                    remove_file("./Server/data_to_MATLAB.txt");
+                    remove_file("./Server/data_to_cpp.txt");
                 }
                 else if(buf[0] == 'E'){
                     make_txt(buf);
                     rst = getRst_sendRst(ep_vec[i].data.fd);
-                    remove_file("data_to_MATLAB.txt");
-                    remove_file("data_to_cpp.txt");
+                    remove_file("./Server/data_to_MATLAB.txt");
+                    remove_file("./Server/data_to_cpp.txt");
                 }
                 else if(buf[0] == 'G'){
                     make_txt(buf);
                     rst = getRst_sendRst(ep_vec[i].data.fd);
-                    remove_file("data_to_MATLAB.txt");
-                    remove_file("data_to_cpp.txt");
-                    send_graph(client_sock, "./../Graph");
+                    remove_file("./Server/data_to_MATLAB.txt");
+                    remove_file("./Server/data_to_cpp.txt");
+                    send_graph(client_sock, "./Graph");
                 }
                 else if(buf[0] == 'F'){
                     make_txt(buf);                    
                     rst = getRst_sendRst(ep_vec[i].data.fd);
-                    remove_file("data_to_MATLAB.txt");
-                    remove_file("data_to_cpp.txt");
-                    send_graph(client_sock, "./../Curve_Fitting");
+                    remove_file("./Server/data_to_MATLAB.txt");
+                    remove_file("./Server/data_to_cpp.txt");
+                    send_graph(client_sock, "./Curve_Fitting");
                 }
                 cout << "result : " << rst << endl; 
                 epoll_ctl(epfd, EPOLL_CTL_DEL, ep_vec[i].data.fd, NULL);
