@@ -1,3 +1,9 @@
+============================ READEME ============================
+
+THIS FILE EXPLAINS THE ROLE OF EXECUTE FILE, server_CPP, server_MATLAB.m.
+
+=================================================================
+
 In order to run the server, you need to run MATLAB and shell in Linux at the same time.
 The shell file, 'server_CPP.cpp' and the m-file, 'server_MATLAB.m', is in the right outsider of three folders.
 In MATLAB, To run it, current working path should be same with the address of 'server_MATLAB.m'.
