@@ -1,4 +1,6 @@
 while true
+    clear all;
+    close all;    
     disp('process strat');
     while true
         if (exist('data_to_MATLAB.txt') == 2)

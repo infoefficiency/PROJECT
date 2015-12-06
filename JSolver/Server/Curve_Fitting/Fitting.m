@@ -35,22 +35,22 @@ try
     if dimension == 2    
         % 2 - dimensional
         f = fit(M1(1:end, 1), M1(1:end, 2), Fittype);
-        plot(M2(1:end,1), f(M2(1:end,1)), 'bo');
+        plot(M2(1:end,1), f(M2(1:end,1)), 'bo', 'MarkerSize', 10, 'linewidth',3);
         grid on;
         hold on;
-        plot(M1(1:end, 1), M1(1:end, 2), 'r*');
+        plot(M1(1:end, 1), M1(1:end, 2), 'r*', 'MarkerSize', 10);
         plot(f);    
         legend('serching data', 'existing data', 'fitted curve', 'location', 'best');        
     else
         % 3 - dimensional    
         f = fit([M1(1:end, 1), M1(1:end, 2)], M1(1:end, 3), Fittype);    
-        plot3(M1(1:end, 1), M1(1:end, 2), M1(1:end, 3), 'ro', 'MarkerSize', 20);
-        plot3(M1(1:end,1), M1(1:end,2), f(M1(1:end,1), M1(1:end,2)), 'r*', 'MarkerSize', 20);    
+        plot3(M2(1:end,1), M2(1:end,2), f(M2(1:end,1), M2(1:end,2)), 'bo', 'MarkerSize', 10, 'linewidth', 3); 
         grid on;
         hold on;    
+        plot3(M1(1:end, 1), M1(1:end, 2), M1(1:end, 3), 'r*', 'MarkerSize', 10);        
         plot(f);
         legend('serching data', 'existing data', 'fitted curve', 'location', 'best');  
-        end
+    end
 
     % determine whether expression is exist or not.
     if strcmp(Fittype, 'smoothingspline') | strcmp(Fittype, 'lowess')
@@ -69,9 +69,15 @@ try
             ret = [ret, coefn{i}, ' : ', num2str(coefv(i)), '\n'];
         end
         
-        for i = 1:length(M2)
-            ret = [ret, 'f(', num2str(M2(i)), ') = ', num2str(f(M2(i))), '\n'];
-        end
+        if dimension == 2            
+            for i = 1:length(M2)
+                ret = [ret, 'f(', num2str(M2(i)), ') = ', num2str(f(M2(i))), '\n'];
+            end
+        elseif dimension == 3
+            for i = 1:length(M2)
+                ret = [ret, 'f(', num2str(M2(i,1)), ',', num2str(M2(i,2)), ') = ', num2str(f(M2(i,:))), '\n'];
+            end
+        end            
     else   
         ret = 'No expression';    
     end
@@ -80,5 +86,5 @@ try
     close;
 catch
     ok = 0;
-    ret = 'Error input'
+    ret = 'Error input';
 end

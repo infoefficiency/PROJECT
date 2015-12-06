@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
         error_handling("bind() error");
     }
 
-    if( listen(serv_sock, 128) == -1){
+    if( listen(serv_sock, 1024) == -1){
         error_handling("listen() error");
     }
 
