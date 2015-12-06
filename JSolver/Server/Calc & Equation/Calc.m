@@ -70,7 +70,7 @@ try
             % save the solution.
             ret = char(rst(1));
             for i = 2:length(rst)
-                ret = strcat(ret, [', ', char(rst(i))]);
+				ret = [rst1, ' = ', rst2];                
             end
         end
     else
