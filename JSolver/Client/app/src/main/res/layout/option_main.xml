@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/imageView2"
+        android:background="@drawable/range"
+
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView3"
+            android:background="@drawable/x_range"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/RangXEdit"
+            android:gravity="center"
+            android:text="-10" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView4"
+            android:background="@drawable/to"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/RangXEdit2"
+            android:text="10"
+            android:gravity="center"
+            android:layout_marginRight="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView5"
+            android:background="@drawable/y_range"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/RangYEdit"
+            android:gravity="center"
+            android:text="-10" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView6"
+            android:background="@drawable/to"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/RangYEdit2"
+            android:text="10"
+            android:gravity="center"
+            android:layout_marginRight="20dp" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/imageView7"
+        android:background="@drawable/title"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView8"
+            android:background="@drawable/x_range"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/TitleX"
+            android:text="X"
+            android:gravity="center"
+            android:layout_marginRight="50dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView9"
+            android:background="@drawable/y_range"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/TitleY"
+            android:text="Y"
+            android:gravity="center"
+            android:layout_marginRight="50dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView10"
+            android:background="@drawable/g_title"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/TitleTot"
+            android:text="(Input)"
+            android:gravity="center"
+            android:layout_marginRight="50dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/tothemain"
+        android:id="@+id/TotheMain"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
