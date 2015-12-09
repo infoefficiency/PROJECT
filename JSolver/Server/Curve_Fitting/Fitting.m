@@ -86,5 +86,5 @@ try
     close;
 catch
     ok = 0;
-    ret = 'Error input';
+    ret = 'Curve Fitting Error - report to the Maker. :)';
 end

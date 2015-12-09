@@ -1,20 +1,29 @@
 % This function is about calculation.
 function ret = Calc(str)
+error_classify = 0;
 try
-    %% Preprocess
+    %% Preprocess    
     mode = str(1);
     expr = str(3:end);    
     % �Է� ���� ���ڿ��� ��Ʈ���� �ν��� �� �ְ� ����
     expr = MAN_to_MATLAB(expr);
-    
+    from_comma_expr = [];
+    if( nnz(expr == ',') )
+        comma_idx = strfind(expr, ',');       
+        from_comma_expr = expr(comma_idx(1):end);    
+        expr = expr(1:comma_idx(1)-1);
+       
+    end
     % ���� ����
     sym_list = Get_Symbolic(expr);        
     for i = 1:length(sym_list)
         syms(sym_list(i));
     end
+    expr = [expr, from_comma_expr];    
     
     %% Calculation
     if mode == 'C' || mode == 'A'
+        error_classify = 1;
         % get result
         rst1 = eval(expr);
         % if result can be calculated more, then do it.
@@ -32,12 +41,13 @@ try
             
             if strcmp(rst1, rst2)
                 ret = rst1;
-            else                
-                ret = strcat(rst1, {' = '}, rst2);
+            else 
+                ret = [rst1, ' = ', rst2];                
             end
         end
     %% Solve Equation.
     elseif mode == 'E'
+        error_classify = 2;
         expr = Arrange(expr, sym_list);        
         if nnz( expr == '''' )            
             % prime�� ��ġ�� �ľ��ؼ� y'' => D2y �� �ٲ۴�.
@@ -64,13 +74,13 @@ try
             % ----- 'x'�� ����ڿ� �°� ������ �� �ְ� �����ؾ��Ѵ�.
             rst = dsolve(expr, 'x');
             ret = char(rst);
-        else
+        else            
             % Polynomial Equation   
             rst = solve(sym(expr));
             % save the solution.
             ret = char(rst(1));
             for i = 2:length(rst)
-				ret = [rst1, ' = ', rst2];                
+                ret = strcat(ret, [', ', char(rst(i))]);
             end
         end
     else
@@ -82,6 +92,11 @@ try
         ret = MATLAB_to_MAN(ret);    
     end
 catch
-    ret = 'Error expression';
-    
+    if error_classify == 0
+        ret = 'Error Input';
+    elseif error_classify == 1
+        ret = 'Calculation Error - report to the Maker. :)';
+    elseif error_classify == 2
+        ret = 'Equation Error - report to the Maker. :)';
+    end   
 end

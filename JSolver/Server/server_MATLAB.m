@@ -35,7 +35,7 @@ while true
             fwrite(ferr, '1');
             fclose(ferr);
         elseif ok == 0
-            fwrite(ferr, '0')
+            fwrite(ferr, '0');
             fclose(ferr);
         end
     end

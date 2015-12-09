@@ -70,6 +70,7 @@ void send_graph(int client_sock, const string path){
         fin.open(path + "/graph.jpg", ios::binary);        
     }
     else{
+        sleep(1);  //wait the completion of graph proces
         fin.open(path + "/error.jpg", ios::binary);
     }
 

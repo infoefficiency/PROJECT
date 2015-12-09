@@ -53,4 +53,16 @@ if ~isempty(a)
     end
 end
 
+
+%% "(double quotation) -> '' (2 single quotation)
+while 1
+    idx = strfind(expr, '"');    
+    if isempty(idx) 
+        break;
+    end
+    expr = [expr(1:idx(1)-1), '''''', expr(idx(1)+1:end)];
+end
+    
+
+
 ret = expr;

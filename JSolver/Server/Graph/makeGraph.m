@@ -32,5 +32,5 @@ try
     close;
 catch
     ok = 0;
-    ret = 'Error function';
+    ret = 'Graph Error - report to the Maker.';
 end
